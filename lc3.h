@@ -3,7 +3,6 @@
 
 /*includes*/
 #include <stdio.h>
-#include <bits/stdint-uintn.h>
 #include <stdint.h>
 
 /*defines*/
