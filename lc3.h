@@ -2,13 +2,17 @@
 #define LC3_H
 
 /*includes*/
+#include <stdio.h>
+#include <bits/stdint-uintn.h>
 #include <stdint.h>
 
 /*defines*/
 #define MEMORY_MAX (1<<16)
 
 
-
+/**
+ * registers addresses
+ */
 enum{
 	R_R0,
 	R_R1,
@@ -23,6 +27,9 @@ enum{
 	R_COUNT
 };
 
+/**
+ * opcodes
+ */
 enum {
 	OP_BR, //branch
 	OP_ADD, //addition
@@ -58,12 +65,13 @@ enum {
 };
 
 
-uint16_t mem_read(uint16_t);
+uint16_t mem_read(uint16_t*, uint16_t);
 uint16_t read_image(char*);
-uint16_t image_load(uint16_t image[]);
+uint16_t image_load(uint16_t*, uint16_t*, uint16_t*);
 
-uint16_t add(uint16_t instr);
-uint16_t _and(uint16_t instr);
+void add(uint16_t instr, uint16_t *);
+void _and(uint16_t instr, uint16_t*);
+void ldi(uint16_t instr, uint16_t*, uint16_t*);
 
 uint16_t get_mode(uint16_t instr);
 uint16_t get_dst(uint16_t instr);
@@ -72,5 +80,5 @@ uint16_t get_sr2(uint16_t instr);
 uint16_t get_operand(uint16_t instr);
 
 uint16_t sign_extend(uint16_t x, int bit_count);
-void update_fl(uint16_t r);
+void update_fl(uint16_t r, uint16_t *);
 #endif
