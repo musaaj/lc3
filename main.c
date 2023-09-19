@@ -8,8 +8,8 @@ uint16_t prog[] = {
 	0x1235,
 	0x1241,
 	0x1241,
-	0x1234,
-	0x5210,
+	0x1241,
+	0x0284,
 	0xf000
 };
 
@@ -26,10 +26,10 @@ int main(void)
 	{
 		uint16_t instr = mem_read(memory, reg[R_PC]++);
 		uint16_t opcode = instr >> 12;
-		
 		switch (opcode)
 		{
 			case OP_BR:
+				br(instr, reg);
 				break;
 			case OP_ADD:
 				add(instr, reg);
@@ -71,9 +71,3 @@ int main(void)
 	}
 	return 0;
 }
-
-
-
-
-
-

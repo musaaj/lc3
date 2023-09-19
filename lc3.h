@@ -49,9 +49,9 @@ enum {
 };
 
 enum {
-	FL_POS = 1 < 0,
-	FL_ZRO = 1 < 1,
-	FL_NEG = 1 < 2
+	FL_POS = 1 << 0,
+	FL_ZRO = 1 << 1,
+	FL_NEG = 1 << 0
 };
 
 enum {
@@ -63,6 +63,12 @@ enum {
 	NINE_BIT = 9,
 };
 
+enum {
+	TRAP_GETC,
+	TRAP_PUTC,
+	TRAP_EXIT
+};
+
 
 uint16_t mem_read(uint16_t*, uint16_t);
 uint16_t read_image(char*);
@@ -71,6 +77,7 @@ uint16_t image_load(uint16_t*, uint16_t*, uint16_t*);
 void add(uint16_t instr, uint16_t *);
 void _and(uint16_t instr, uint16_t*);
 void ldi(uint16_t instr, uint16_t*, uint16_t*);
+void br(uint16_t instr, uint16_t*);
 
 uint16_t get_mode(uint16_t instr);
 uint16_t get_dst(uint16_t instr);

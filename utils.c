@@ -49,7 +49,7 @@ uint16_t get_sr2(uint16_t instr)
  */
 uint16_t get_operand(uint16_t instr)
 {
-	return instr & 15;
+	return instr & 0xf;
 }
 
 /**
@@ -77,16 +77,15 @@ void update_fl(uint16_t r, uint16_t *reg)
 	if (reg[r] == 0)
 	{
 		reg[R_COND] = FL_ZRO;
-		return;
 	}
-
-	if ((reg[r] >> 15) & 0x1)
+	else if ((reg[r] >> 15) & 0x1)
 	{
 		reg[R_COND] = FL_NEG;
-		return;
 	}
-
-	reg[R_COND] = FL_POS;
+	else
+	{
+	  reg[R_COND] = FL_POS;
+	}
 }
 
 /**
@@ -99,5 +98,3 @@ uint16_t mem_read(uint16_t* memory, uint16_t pos)
 {
 	return memory[pos];
 }
-
-

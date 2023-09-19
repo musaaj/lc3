@@ -23,6 +23,6 @@ void add(uint16_t instr, uint16_t* reg)
 	  uint16_t sr2 = get_sr2(instr);
 	  reg[dst] = reg[sr1] + reg[sr2];
 	}
-	printf("%i\n", reg[dst]);
+
 	update_fl(dst, reg);
 }
