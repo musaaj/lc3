@@ -4,13 +4,18 @@
 uint16_t reg[R_COUNT];
 uint16_t memory[MEMORY_MAX];
 uint16_t prog[] = {
+	0x0003,
 	0x5220,
 	0x1235,
 	0x1241,
 	0x1241,
 	0x1241,
-	0x0284,
-	0xf000
+	0x0302,
+	0xf020,
+	0xf023,
+	0xf021,
+	0xf022,
+	0xf025
 };
 
 
@@ -35,34 +40,44 @@ int main(void)
 				add(instr, reg);
 				break;
 			case OP_LD:
+				ld(instr, memory, reg);
 				break;
 			case OP_ST:
+				st(instr, memory, reg);
 				break;
 			case OP_JSR:
+				jsr(instr, reg);
 				break;
 			case OP_AND:
 				_and(instr, reg);
 				break;
 			case OP_LDR:
+				ldr(instr, memory, reg);
 				break;
 			case OP_STR:
+				str(instr, memory, reg);
 				break;
 			case OP_RTI:
 				break;
 			case OP_NOT:
+				_not(instr, reg);
 				break;
 			case OP_LDI:
+				ldi(instr, memory, reg);
 				break;
 			case OP_STI:
+				sti(instr, memory, reg);
 				break;
 			case OP_JMP:
+				jmp(instr, reg);
 				break;
 			case OP_RES:
 				break;
 			case OP_LEA:
+				lea(instr, reg);
 				break;
 			case OP_TRAP:
-				exit(EXIT_SUCCESS);
+				trap(instr, memory, reg);
 				break;
 			default:
 				break;

@@ -61,23 +61,39 @@ enum {
 enum {
 	FIVE_BIT = 4,
 	NINE_BIT = 9,
+	ELEVEN_BIT = 10,
+	SIX_BIT = 6
 };
 
 enum {
-	TRAP_GETC,
-	TRAP_PUTC,
-	TRAP_EXIT
+	TRAP_GETC = 0x20,
+	TRAP_OUT = 0x21,
+	TRAP_PUTS = 0x22,
+	TRAP_IN = 0x23,
+	TRAP_PUTSP = 0x24,
+	TRAP_HALT = 0x25
 };
 
 
-uint16_t mem_read(uint16_t*, uint16_t);
-uint16_t read_image(char*);
+uint16_t mem_read(uint16_t* mem_read, uint16_t idx);
+uint16_t read_image(char* filename);
 uint16_t image_load(uint16_t*, uint16_t*, uint16_t*);
 
-void add(uint16_t instr, uint16_t *);
+void add(uint16_t instr, uint16_t * reg);
 void _and(uint16_t instr, uint16_t*);
-void ldi(uint16_t instr, uint16_t*, uint16_t*);
-void br(uint16_t instr, uint16_t*);
+void _not(uint16_t instr, uint16_t* reg);
+void ldi(uint16_t instr, uint16_t* memory, uint16_t* reg);
+void br(uint16_t instr, uint16_t* reg);
+void jmp(uint16_t instr, uint16_t*);
+void jsr(uint16_t instr, uint16_t*);
+void ld(uint16_t, uint16_t* memory, uint16_t* reg);
+void ldr(uint16_t instr, uint16_t* memory, uint16_t* reg);
+void lea(uint16_t instr, uint16_t* reg);
+void st(uint16_t instr, uint16_t* memory, uint16_t* reg);
+void sti(uint16_t instr, uint16_t* memory, uint16_t* reg);
+void str(uint16_t instr, uint16_t* memory, uint16_t* reg);
+void trap(uint16_t instr, uint16_t* memory, uint16_t* reg);
+
 
 uint16_t get_mode(uint16_t instr);
 uint16_t get_dst(uint16_t instr);
@@ -87,4 +103,9 @@ uint16_t get_operand(uint16_t instr);
 
 uint16_t sign_extend(uint16_t x, int bit_count);
 void update_fl(uint16_t r, uint16_t *);
+
+//traps
+uint16_t _getc(void);
+void _puts(uint16_t* memory, uint16_t* reg);
+void _putsp(uint16_t* memory, uint16_t* reg);
 #endif

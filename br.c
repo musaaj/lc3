@@ -14,6 +14,6 @@ void br(uint16_t instr, uint16_t* reg)
 	uint16_t offset = instr & 0x1ff;
 	if (reg[R_COND] == condition)
 	{
-		reg[R_PC] = reg[R_PC] - sign_extend(offset, NINE_BIT);
+		reg[R_PC] = reg[R_PC] + sign_extend(offset, NINE_BIT);
 	}
 }

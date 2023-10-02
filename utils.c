@@ -62,13 +62,13 @@ uint16_t sign_extend(uint16_t x, int bit_count)
 {
 	if ((x >> (bit_count - 1) & 0x1))
 	{
-		x |= (0xffff << bit_count);
+		x = ~(x & ~(1 << (bit_count - 1))) + 1;
 	}
 	return x;
 }
 
 /**
- * update_fl - update flag register with the sig of the last operation
+ * update_fl - update flag register with the sign of the last operation
  * @r: index of register in @reg array
  * @reg: array of registers
  */
